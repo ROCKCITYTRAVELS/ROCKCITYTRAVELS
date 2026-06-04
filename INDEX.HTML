@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rockcity Call Taxi & Travels - Trichy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0272D;
+    --navy: #0D1B3E;
+    --gold: #C9972A;
+    --cream: #FFF8EE;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(13,27,62,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo .brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem; color: var(--red);
+    text-shadow: 0 0 20px rgba(192,39,45,0.4);
+  }
+  .nav-logo .sub { font-size: 0.65rem; letter-spacing: 3px; color: var(--gold); display: block; margin-top: -4px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--white); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-call {
+    background: var(--red);
+    color: white; padding: 10px 22px;
+    border-radius: 30px; font-weight: 700;
+    font-size: 0.85rem; text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(192,39,45,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-call:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(192,39,45,0.6); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(to bottom, rgba(13,27,62,0.75) 0%, rgba(13,27,62,0.4) 50%, rgba(13,27,62,0.9) 100%),
+      url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600&q=80') center/cover no-repeat;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 20px 60px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top, rgba(192,39,45,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+    padding: 6px 18px; border-radius: 20px;
+    margin-bottom: 20px; display: inline-block;
+    animation: fadeDown 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--white);
+    line-height: 1;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    animation: fadeDown 1s 0.2s ease both;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    color: var(--gold);
+    letter-spacing: 4px; margin: 14px 0 8px;
+    animation: fadeDown 1s 0.4s ease both;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem; letter-spacing: 2px;
+    margin-bottom: 40px;
+    animation: fadeDown 1s 0.5s ease both;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeDown 1s 0.7s ease both; }
+  .btn-primary {
+    background: var(--red);
+    color: white; padding: 16px 36px;
+    border-radius: 40px; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 2px;
+    text-decoration: none;
+    box-shadow: 0 6px 30px rgba(192,39,45,0.5);
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(192,39,45,0.6); }
+  .btn-outline {
+    border: 2px solid var(--gold);
+    color: var(--gold); padding: 14px 34px;
+    border-radius: 40px; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 2px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 30px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.4); font-size: 0.7rem; letter-spacing: 2px;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after {
+    content: '↓'; font-size: 1.2rem; color: var(--gold);
+  }
+
+  /* ── FEATURES STRIP ── */
+  .features-strip {
+    background: var(--red);
+    display: grid; grid-template-columns: repeat(4,1fr);
+    text-align: center;
+  }
+  .feat {
+    padding: 28px 20px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.3s;
+  }
+  .feat:last-child { border-right: none; }
+  .feat:hover { background: rgba(0,0,0,0.2); }
+  .feat-icon { font-size: 2rem; margin-bottom: 8px; }
+  .feat-title { font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; }
+  .feat-desc { font-size: 0.72rem; opacity: 0.8; margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 40px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 4px; color: var(--gold);
+    font-weight: 700; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-title span { color: var(--red); }
+  .section-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    margin-bottom: 40px; border-radius: 2px;
+  }
+
+  /* ── VEHICLES ── */
+  .vehicles { background: #0a1528; }
+  .vehicles-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 24px; margin-top: 40px;
+  }
+  .vehicle-card {
+    background: linear-gradient(135deg, #111e3a, #0d1b3e);
+    border: 1px solid rgba(201,151,42,0.3);
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .vehicle-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(192,39,45,0.3);
+    border-color: var(--gold);
+  }
+  .vehicle-img {
+    width: 100%; height: 180px; object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #1a2744, #0f1e3d);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .vehicle-body { padding: 20px; }
+  .vehicle-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; margin-bottom: 6px;
+  }
+  .vehicle-capacity {
+    color: var(--gold); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .vehicle-features { display: flex; gap: 8px; flex-wrap: wrap; }
+  .vf {
+    background: rgba(201,151,42,0.12);
+    border: 1px solid rgba(201,151,42,0.3);
+    color: var(--gold); font-size: 0.68rem; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px; letter-spacing: 1px;
+  }
+  .vehicle-tag {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--red); color: white;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--navy); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 20px; margin-top: 40px;
+  }
+  .service-card {
+    background: linear-gradient(135deg, rgba(192,39,45,0.1), rgba(13,27,62,0.5));
+    border: 1px solid rgba(192,39,45,0.3);
+    border-radius: 14px; padding: 32px 24px;
+    text-align: center; transition: all 0.3s;
+  }
+  .service-card:hover {
+    background: linear-gradient(135deg, rgba(192,39,45,0.25), rgba(13,27,62,0.8));
+    border-color: var(--red); transform: translateY(-4px);
+  }
+  .service-icon { font-size: 2.5rem; margin-bottom: 14px; }
+  .service-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; letter-spacing: 1px; }
+  .service-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* ── BOOKING FORM ── */
+  .booking { background: #060d1e; }
+  .booking-wrap {
+    max-width: 700px; margin: 0 auto;
+    background: linear-gradient(135deg, #0d1b3e, #111e3a);
+    border: 1px solid rgba(201,151,42,0.4);
+    border-radius: 20px; padding: 48px 40px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1/-1; }
+  label { font-size: 0.72rem; letter-spacing: 2px; font-weight: 700; color: var(--gold); }
+  input, select, textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white; padding: 13px 16px;
+    border-radius: 10px; font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem; transition: border 0.3s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
+  }
+  select option { background: #0d1b3e; }
+  .btn-book {
+    background: linear-gradient(135deg, var(--red), #a01e23);
+    color: white; border: none; padding: 18px;
+    border-radius: 12px; font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 3px;
+    cursor: pointer; width: 100%; margin-top: 8px;
+    box-shadow: 0 6px 30px rgba(192,39,45,0.4);
+    transition: all 0.3s;
+  }
+  .btn-book:hover {
+    box-shadow: 0 10px 40px rgba(192,39,45,0.6);
+    transform: translateY(-2px);
+  }
+
+  /* ── WHY US ── */
+  .why { background: var(--red); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 30px; margin-top: 40px; }
+  .why-item { text-align: center; }
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: rgba(255,255,255,0.2); line-height: 1;
+  }
+  .why-label { font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; margin-top: 4px; }
+  .why-sub { font-size: 0.75rem; opacity: 0.8; margin-top: 6px; }
+
+  /* ── DESTINATIONS ── */
+  .destinations { background: #0a1528; }
+  .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 14px; margin-top: 40px; }
+  .dest-pill {
+    border: 1px solid rgba(201,151,42,0.4);
+    padding: 14px 18px; border-radius: 50px;
+    text-align: center; font-size: 0.8rem; font-weight: 600;
+    color: rgba(255,255,255,0.85); cursor: pointer;
+    transition: all 0.3s; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+  }
+  .dest-pill:hover {
+    background: var(--gold); color: var(--navy);
+    border-color: var(--gold); transform: scale(1.03);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--navy); }
+  .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; margin-top: 40px; }
+  .test-card {
+    background: linear-gradient(135deg, #0f1e3d, #111e3a);
+    border: 1px solid rgba(201,151,42,0.2);
+    border-radius: 16px; padding: 28px;
+    position: relative;
+  }
+  .test-stars { color: var(--gold); font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
+  .test-text { font-size: 0.83rem; color: rgba(255,255,255,0.75); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+  .test-name { font-weight: 700; font-size: 0.85rem; color: var(--gold); }
+  .test-loc { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+  .quote-mark {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 4rem; color: rgba(192,39,45,0.15);
+    font-family: 'Playfair Display', serif; line-height: 1;
+  }
+
+  /* ── CONTACT ── */
+  .contact { background: #060d1e; }
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .cinfo {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .cinfo-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(192,39,45,0.2); border: 1px solid rgba(192,39,45,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .cinfo-title { font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
+  .cinfo-val { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+  .map-placeholder {
+    background: linear-gradient(135deg, #0d1b3e, #111e3a);
+    border: 1px solid rgba(201,151,42,0.3);
+    border-radius: 16px; height: 300px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px; color: rgba(255,255,255,0.4);
+    font-size: 0.85rem; letter-spacing: 1px;
+  }
+  .map-placeholder span { font-size: 3rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #030811;
+    border-top: 1px solid rgba(201,151,42,0.3);
+    padding: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem; color: var(--red);
+  }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+  .footer-phone {
+    background: var(--gold); color: var(--navy);
+    padding: 10px 24px; border-radius: 30px;
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; letter-spacing: 1px;
+  }
+
+  /* ── FLOATING CALL ── */
+  .float-call {
+    position: fixed; bottom: 30px; right: 30px; z-index: 998;
+    background: var(--red); color: white;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; text-decoration: none;
+    box-shadow: 0 6px 30px rgba(192,39,45,0.6);
+    animation: pulse 2s infinite;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 6px 30px rgba(192,39,45,0.6); }
+    50% { box-shadow: 0 6px 50px rgba(192,39,45,0.9); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px) {
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .features-strip { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .booking-wrap { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div>
+      <div class="brand">Rockcity</div>
+      <span class="sub">CALL TAXI & TRAVELS</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#vehicles">VEHICLES</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="#booking">BOOK NOW</a></li>
+    <li><a href="#destinations">DESTINATIONS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <a href="tel:9843222224" class="nav-call">📞 98432 22224</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge">✦ TRICHY'S TRUSTED TAXI SERVICE ✦</div>
+  <h1><span>Rockcity</span><br>Call Taxi & Travels</h1>
+  <div class="hero-tagline">ONE CALL · ENDLESS COMFORT</div>
+  <p class="hero-sub">Thillainagar, Trichy &nbsp;|&nbsp; 24×7 Service &nbsp;|&nbsp; All South India</p>
+  <div class="hero-btns">
+    <a href="tel:9843222224" class="btn-primary">📞 CALL NOW — 98432 22224</a>
+    <a href="#booking" class="btn-outline">BOOK ONLINE</a>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="feat">
+    <div class="feat-icon">👨‍✈️</div>
+    <div class="feat-title">EXPERIENCED DRIVERS</div>
+    <div class="feat-desc">Trained & courteous professionals</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">🛡️</div>
+    <div class="feat-title">SAFE & SECURE</div>
+    <div class="feat-desc">GPS tracked, insured vehicles</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">🚗</div>
+    <div class="feat-title">CLEAN & COMFORT</div>
+    <div class="feat-desc">Well-maintained fleet always</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">📍</div>
+    <div class="feat-title">OUTSTATION TRIPS</div>
+    <div class="feat-desc">All Tamil Nadu & South India</div>
+  </div>
+</div>
+
+<!-- VEHICLES -->
+<section class="vehicles" id="vehicles">
+  <div class="section-label">OUR FLEET</div>
+  <div class="section-title">Choose Your <span>Ride</span></div>
+  <div class="section-line"></div>
+  <div class="vehicles-grid">
+    <div class="vehicle-card">
+      <div class="vehicle-img">🚗</div>
+      <div class="vehicle-tag">ECONOMY</div>
+      <div class="vehicle-body">
+        <div class="vehicle-name">Maruti Dzire</div>
+        <div class="vehicle-capacity">👤 4 PASSENGERS</div>
+        <div class="vehicle-features">
+          <span class="vf">AC</span><span class="vf">SEDAN</span><span class="vf">CITY</span><span class="vf">OUTSTATION</span>
+        </div>
+      </div>
+    </div>
+    <div class="vehicle-card">
+      <div class="vehicle-img">🚘</div>
+      <div class="vehicle-tag">COMFORT</div>
+      <div class="vehicle-body">
+        <div class="vehicle-name">Toyota Etios</div>
+        <div class="vehicle-capacity">👤 4 PASSENGERS</div>
+        <div class="vehicle-features">
+          <span class="vf">AC</span><span class="vf">SEDAN</span><span class="vf">CITY</span><span class="vf">OUTSTATION</span>
+        </div>
+      </div>
+    </div>
+    <div class="vehicle-card">
+      <div class="vehicle-img">🚙</div>
+      <div class="vehicle-tag">POPULAR</div>
+      <div class="vehicle-body">
+        <div class="vehicle-name">Innova Crysta</div>
+        <div class="vehicle-capacity">👤 6-7 PASSENGERS</div>
+        <div class="vehicle-features">
+          <span class="vf">AC</span><span class="vf">SUV</span><span class="vf">LUXURY</span><span class="vf">TOURS</span>
+        </div>
+      </div>
+    </div>
+    <div class="vehicle-card">
+      <div class="vehicle-img">🚐</div>
+      <div class="vehicle-tag">GROUP</div>
+      <div class="vehicle-body">
+        <div class="vehicle-name">Tempo Traveller</div>
+        <div class="vehicle-capacity">👤 14 PASSENGERS</div>
+        <div class="vehicle-features">
+          <span class="vf">AC</span><span class="vf">VAN</span><span class="vf">GROUP</span><span class="vf">TOURS</span>
+        </div>
+      </div>
+    </div>
+    <div class="vehicle-card">
+      <div class="vehicle-img">🚌</div>
+      <div class="vehicle-tag">PREMIUM</div>
+      <div class="vehicle-body">
+        <div class="vehicle-name">Hi-Tech Van</div>
+        <div class="vehicle-capacity">👤 20 PASSENGERS</div>
+        <div class="vehicle-features">
+          <span class="vf">AC</span><span class="vf">COACH</span><span class="vf">PILGRIMAGE</span><span class="vf">LUXURY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">WHAT WE OFFER</div>
+  <div class="section-title">Our <span>Services</span></div>
+  <div class="section-line"></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏙️</div>
+      <div class="service-title">CITY TAXI</div>
+      <div class="service-desc">Quick & affordable local rides within Trichy at any time of day or night.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛣️</div>
+      <div class="service-title">OUTSTATION</div>
+      <div class="service-desc">Comfortable long-distance travel to any destination across South India.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛕</div>
+      <div class="service-title">PILGRIMAGE TOURS</div>
+      <div class="service-desc">Temple tours to Rameshwaram, Madurai, Tirupati & more with guidance.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✈️</div>
+      <div class="service-title">AIRPORT TRANSFERS</div>
+      <div class="service-desc">Reliable pick-up & drop to Trichy International Airport, on time always.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💒</div>
+      <div class="service-title">WEDDING CARS</div>
+      <div class="service-desc">Elegant, decorated vehicles for your special occasions and ceremonies.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏔️</div>
+      <div class="service-title">HILL STATION TOURS</div>
+      <div class="service-desc">Ooty, Kodaikanal, Munnar & Yercaud packages with experienced drivers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="section-label" style="color:rgba(255,255,255,0.7)">WHY CHOOSE US</div>
+  <div class="section-title" style="color:white">Trichy's Most <span style="color:var(--navy)">Trusted</span> Travels</div>
+  <div class="section-line" style="background:rgba(255,255,255,0.4)"></div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">24/7</div>
+      <div class="why-label">ALWAYS AVAILABLE</div>
+      <div class="why-sub">Round the clock service, every day</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">10+</div>
+      <div class="why-label">YEARS EXPERIENCE</div>
+      <div class="why-sub">Serving Trichy with pride</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">50+</div>
+      <div class="why-label">VEHICLES</div>
+      <div class="why-sub">Wide fleet for all needs</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">★4.8</div>
+      <div class="why-label">CUSTOMER RATING</div>
+      <div class="why-sub">Thousands of happy rides</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="booking" id="booking">
+  <div class="section-label" style="text-align:center">INSTANT BOOKING</div>
+  <div class="section-title" style="text-align:center">Book Your <span>Taxi Now</span></div>
+  <div class="section-line" style="margin:0 auto 40px"></div>
+  <div class="booking-wrap">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>YOUR NAME</label>
+        <input type="text" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label>MOBILE NUMBER</label>
+        <input type="tel" placeholder="Enter mobile number">
+      </div>
+      <div class="form-group">
+        <label>PICKUP LOCATION</label>
+        <input type="text" placeholder="Pickup address">
+      </div>
+      <div class="form-group">
+        <label>DROP LOCATION</label>
+        <input type="text" placeholder="Drop address">
+      </div>
+      <div class="form-group">
+        <label>DATE & TIME</label>
+        <input type="datetime-local">
+      </div>
+      <div class="form-group">
+        <label>VEHICLE TYPE</label>
+        <select>
+          <option value="">Select vehicle</option>
+          <option>Maruti Dzire (Sedan)</option>
+          <option>Toyota Etios (Sedan)</option>
+          <option>Innova Crysta (SUV)</option>
+          <option>Tempo Traveller (Van)</option>
+          <option>Hi-Tech Van (Coach)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>PACKAGE</label>
+        <select>
+          <option value="">Select package</option>
+          <option>City Ride</option>
+          <option>Hourly Package</option>
+          <option>Outstation (One-way)</option>
+          <option>Outstation (Round-trip)</option>
+          <option>Pilgrimage Tour</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>PASSENGERS</label>
+        <select>
+          <option>1-2 Passengers</option>
+          <option>3-4 Passengers</option>
+          <option>5-7 Passengers</option>
+          <option>8-12 Passengers</option>
+          <option>13+ Passengers</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-book" onclick="sendToWhatsApp()">
+      💬 BOOK VIA WHATSAPP
+    </button>
+    <p style="text-align:center; margin-top:14px; font-size:0.75rem; color:rgba(255,255,255,0.4); letter-spacing:1px">OR CALL DIRECTLY: <strong style="color:var(--gold)">98432 22224</strong></p>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="section-label">POPULAR ROUTES</div>
+  <div class="section-title">Where We <span>Travel</span></div>
+  <div class="section-line"></div>
+  <div class="dest-grid">
+    <div class="dest-pill">🕌 Rameshwaram</div>
+    <div class="dest-pill">🛕 Madurai</div>
+    <div class="dest-pill">⛰️ Ooty</div>
+    <div class="dest-pill">🌿 Kodaikanal</div>
+    <div class="dest-pill">🌊 Munnar</div>
+    <div class="dest-pill">🏖️ Rameswaram</div>
+    <div class="dest-pill">🛕 Tirupati</div>
+    <div class="dest-pill">🌴 Courtallam</div>
+    <div class="dest-pill">🏔️ Yercaud</div>
+    <div class="dest-pill">✈️ Chennai</div>
+    <div class="dest-pill">🌆 Coimbatore</div>
+    <div class="dest-pill">🏙️ Bangalore</div>
+    <div class="dest-pill">🌊 Pondicherry</div>
+    <div class="dest-pill">⛵ Dhanushkodi</div>
+    <div class="dest-pill">🛕 Thanjavur</div>
+    <div class="dest-pill">🏖️ Rameswaram</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-label">HAPPY CUSTOMERS</div>
+  <div class="section-title">What People <span>Say</span></div>
+  <div class="section-line"></div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="quote-mark">"</div>
+      <div class="test-stars">★★★★★</div>
+      <div class="test-text">Excellent service! Driver was very punctual and courteous. Vehicle was clean and AC was perfect. Will definitely book again for our next trip.</div>
+      <div class="test-name">Rajesh Kumar</div>
+      <div class="test-loc">Thillainagar, Trichy</div>
+    </div>
+    <div class="test-card">
+      <div class="quote-mark">"</div>
+      <div class="test-stars">★★★★★</div>
+      <div class="test-text">Booked Innova for our family trip to Rameshwaram. Driver knew all the routes and temple timings. Very comfortable journey at a fair price!</div>
+      <div class="test-name">Meena Sundaram</div>
+      <div class="test-loc">KK Nagar, Trichy</div>
+    </div>
+    <div class="test-card">
+      <div class="quote-mark">"</div>
+      <div class="test-stars">★★★★★</div>
+      <div class="test-text">24/7 availability is the best part. Needed an airport drop at 4am and they were right on time. Highly reliable and professional team!</div>
+      <div class="test-name">Pradeep Annamalai</div>
+      <div class="test-loc">Srirangam, Trichy</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">GET IN TOUCH</div>
+  <div class="section-title">Contact <span>Us</span></div>
+  <div class="section-line"></div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="cinfo">
+        <div class="cinfo-icon">📞</div>
+        <div>
+          <div class="cinfo-title">CALL / WHATSAPP</div>
+          <div class="cinfo-val">98432 22224</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">📍</div>
+        <div>
+          <div class="cinfo-title">ADDRESS</div>
+          <div class="cinfo-val">C-12, 3rd Cross, Thillainagar,<br>Trichy – 18, Tamil Nadu</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🕐</div>
+        <div>
+          <div class="cinfo-title">WORKING HOURS</div>
+          <div class="cinfo-val">24 Hours × 7 Days<br>Always Available</div>
+        </div>
+      </div>
+      <div class="cinfo">
+        <div class="cinfo-icon">🌐</div>
+        <div>
+          <div class="cinfo-title">SERVICE AREA</div>
+          <div class="cinfo-val">All Tamil Nadu & South India</div>
+        </div>
+      </div>
+      <a href="tel:9843222224" class="btn-primary" style="display:inline-block; text-align:center; margin-top:10px">
+        📞 CALL NOW — 98432 22224
+      </a>
+    </div>
+    <div class="map-placeholder">
+      <span>🗺️</span>
+      <div>C-12, 3rd Cross, Thillainagar</div>
+      <div style="color:var(--gold); font-weight:700">Trichy – 18</div>
+      <a href="https://maps.app.goo.gl/HmmT7QJePYHcYxV1A?g_st=ac" target="_blank" style="color:var(--gold); font-size:0.75rem; letter-spacing:2px; border:1px solid var(--gold); padding:10px 20px; border-radius:30px; text-decoration:none; margin-top:10px; transition:all 0.3s">
+        VIEW ON GOOGLE MAPS →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Rockcity</div>
+  <div class="footer-copy">© 2024 Rockcity Call Taxi & Travels · Trichy · All rights reserved</div>
+  <a href="tel:9843222224" class="footer-phone">📞 98432 22224</a>
+</footer>
+
+<!-- FLOATING CALL BUTTON -->
+<a href="tel:9843222224" class="float-call" title="Call Now">📞</a>
+
+<script>
+function sendToWhatsApp() {
+    let name = document.querySelector('input[placeholder="Enter your name"]').value;
+    let mobile = document.querySelector('input[placeholder="Enter mobile number"]').value;
+    let pickup = document.querySelector('input[placeholder="Pickup address"]').value;
+    let drop = document.querySelector('input[placeholder="Drop address"]').value;
+    let datetime = document.querySelector('input[type="datetime-local"]').value;
+
+    let selects = document.querySelectorAll('select');
+    let vehicle = selects[0].value;
+    let packageType = selects[1].value;
+    let passengers = selects[2].value;
+
+    if (!name || !mobile || !pickup || !drop || !datetime) {
+        alert('Please fill in all fields before booking.');
+        return;
+    }
+
+    let message =
+`🚖 Rockcity Call Taxi & Travels Booking
+
+👤 Name: ${name}
+📱 Mobile: ${mobile}
+📍 Pickup: ${pickup}
+📍 Drop: ${drop}
+🕒 Date & Time: ${datetime}
+🚗 Vehicle: ${vehicle}
+📦 Package: ${packageType}
+👥 Passengers: ${passengers}`;
+
+    let whatsappURL = "https://wa.me/919843222224?text=" + encodeURIComponent(message);
+    window.open(whatsappURL, "_blank");
+}
+</script>
+</body>
+</html>
