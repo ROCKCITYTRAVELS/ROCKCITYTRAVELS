@@ -804,14 +804,14 @@ function sendToWhatsApp() {
     let message =
 `🚖 Rockcity Call Taxi & Travels Booking
 
-👤 Name: ${name}
-📱 Mobile: ${mobile}
-📍 Pickup: ${pickup}
-📍 Drop: ${drop}
-🕒 Date & Time: ${datetime}
-🚗 Vehicle: ${vehicle}
-📦 Package: ${packageType}
-👥 Passengers: ${passengers}`;
+  Name: ${name}
+  Mobile: ${mobile}
+  Pickup: ${pickup}
+  Drop: ${drop}
+  Date & Time: ${datetime}
+  Vehicle: ${vehicle}
+  Package: ${packageType}
+  Passengers: ${passengers}`;
 
     let whatsappURL = "https://wa.me/919843222224?text=" + encodeURIComponent(message);
     window.open(whatsappURL, "_blank");
