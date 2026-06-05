@@ -587,15 +587,15 @@ function sendToWhatsApp() {
   }
 
   var message =
-    '🚖 Rockcity Call Taxi & Travels Booking\n\n' +
-    '👤 Name: ' + name + '\n' +
-    '📱 Mobile: ' + mobile + '\n' +
-    '📍 Pickup: ' + pickup + '\n' +
-    '📍 Drop: ' + drop + '\n' +
-    '🕒 Date & Time: ' + datetime + '\n' +
-    '🚗 Vehicle: ' + vehicle + '\n' +
-    '📦 Package: ' + packageType + '\n' +
-    '👥 Passengers: ' + passengers;
+     Rockcity Call Taxi & Travels Booking\n\n' +
+     Name: ' + name + '\n' +
+     Mobile: ' + mobile + '\n' +
+     Pickup: ' + pickup + '\n' +
+     Drop: ' + drop + '\n' +
+     Date & Time: ' + datetime + '\n' +
+     Vehicle: ' + vehicle + '\n' +
+     Package: ' + packageType + '\n' +
+     Passengers: ' + passengers;
 
   var whatsappURL = 'https://wa.me/919843222224?text=' + encodeURIComponent(message);
   window.open(whatsappURL, '_blank');
