@@ -570,35 +570,35 @@
 
 <script>
 function sendToWhatsApp() {
-  var name     = document.querySelector('input[placeholder="Enter your name"]').value.trim();
-  var mobile   = document.querySelector('input[placeholder="Enter mobile number"]').value.trim();
-  var pickup   = document.querySelector('input[placeholder="Pickup address"]').value.trim();
-  var drop     = document.querySelector('input[placeholder="Drop address"]').value.trim();
-  var datetime = document.querySelector('input[type="datetime-local"]').value;
+    let name = document.querySelector('input[placeholder="Enter your name"]').value;
+    let mobile = document.querySelector('input[placeholder="Enter mobile number"]').value;
+    let pickup = document.querySelector('input[placeholder="Pickup address"]').value;
+    let drop = document.querySelector('input[placeholder="Drop address"]').value;
+    let datetime = document.querySelector('input[type="datetime-local"]').value;
 
-  var selects     = document.querySelectorAll('select');
-  var vehicle     = selects[0].value;
-  var packageType = selects[1].value;
-  var passengers  = selects[2].value;
+    let selects = document.querySelectorAll('select');
+    let vehicle = selects[0].value;
+    let packageType = selects[1].value;
+    let passengers = selects[2].value;
 
-  if (!name || !mobile || !pickup || !drop || !datetime) {
-    alert('அனைத்து தகவல்களையும் நிரப்பவும்!\nPlease fill in all fields before booking.');
-    return;
-  }
+    if (!name || !mobile || !pickup || !drop || !datetime) {
+        alert('Please fill in all fields before booking.');
+        return;
+    }
 
-  var message =
-     Rockcity Call Taxi & Travels Booking\n\n' +
-     Name: ' + name + '\n' +
-     Mobile: ' + mobile + '\n' +
-     Pickup: ' + pickup + '\n' +
-     Drop: ' + drop + '\n' +
-     Date & Time: ' + datetime + '\n' +
-     Vehicle: ' + vehicle + '\n' +
-     Package: ' + packageType + '\n' +
-     Passengers: ' + passengers;
+    let message = `Rockcity Call Taxi & Travels Booking
 
-  var whatsappURL = 'https://wa.me/919843222224?text=' + encodeURIComponent(message);
-  window.open(whatsappURL, '_blank');
+Name: ${name}
+Mobile: ${mobile}
+Pickup: ${pickup}
+Drop: ${drop}
+Date & Time: ${datetime}
+Vehicle: ${vehicle}
+Package: ${packageType}
+Passengers: ${passengers}`;
+
+    let whatsappURL = "https://wa.me/919843222224?text=" + encodeURIComponent(message);
+    window.open(whatsappURL, "_blank");
 }
 </script>
 </body>
